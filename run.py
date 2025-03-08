@@ -56,7 +56,7 @@ for _ in range(question_count):
                     answer = post_process(answer)
                     num_answer,_,_ = process_string(tmp["num-answer"],ws,ns,prev_state,prev_noun,code_results,kb)
                     num_answer = float(num_answer)
-                    print(question,"\n",answer)
+                    # print(question,"\n",answer)
                     # print("--------------")
                     break
 print(len(duplicate_check))
