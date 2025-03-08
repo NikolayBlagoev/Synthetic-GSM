@@ -1,0 +1,21 @@
+{
+    "id": 17,
+    "difficulty": 3,
+    "type": "arithmetics",
+    "question": "{n1,name} готви сос от {n2,noun-ingredient,plural}. Всяка консерва от {x1,int} грама съдържа {x2,int} {n2}. За соса {n1} трябва да използва {x3} грама {n2}. Колко {n2} е изплозвал{gender(n1)} {n1}?" ,
+    "answer": "Тъй като за соса са необходими {x3} грама, {n1} трябва да използва {x3} / {x1} = <<{x3}/{x1}>> = {tmp} консерви.\nВ една консерва има {x2} {n2}, следователно {n1} използва {tmp} * {x2} = <<{tmp}*{x2}>> = {ans} {n2}\n### {ans}" ,
+    "num-answer": "{ans}",
+    "conditions": {
+        "x1": ["randint(100,500,50)"],
+        "x2": ["randint(1,4)"],
+        "tmp": ["randint(2,5)"],
+        "x3": ["x1 * tmp"],
+        "ans": ["tmp * x2"]
+    },
+    "word-conditions": {
+        
+    },
+    "code-execution":{
+        
+    }
+}

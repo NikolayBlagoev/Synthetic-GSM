@@ -1,0 +1,27 @@
+{
+    "id": 5,
+    "difficulty": 3,
+    "type": "algebra",
+    "question": "{n1,name+name} {v1,verb,n1} {n2,noun,v1} за {x2,int} часа и {n3,noun,v1} - за {x3,int}. За една седмица {n1} {v1} {x4,int} {n2} и няколко {n3} за {x1} часа общо. Колко {n3} {vis,is,n3} {v1,passive}?",
+    "answer": "Нека x бъде броят на {n3}.\nЗнаем, че {x2}*{x4} + {x3}*x = {x1} = {x5} + {x3}*x.\nИзваждаме от двете страни {x5}: {x5} + {x3}*x - {x5} = {x1} - {x5} <<{x5}+{x3}*x={x1}-{x5}={x6}>>={x6}.\nРазделяме двете страни на {x3}: {x3}*x/{x3} = {x6}/{x3} = <<{x3}*x/{x3}={x6}/{x3}={x7}>> = {x7}.\n{x7} {n3} {vis} {v1,passive}\n### {x7}" ,
+    "num-answer": "{x7}",
+    "conditions": {
+        "x2": ["randint(2,8)"],
+        "x3": ["randint(2,8)", "! x2"],
+        "x4": ["randint(3,7)"],
+        "x7": ["randint(3,7)"],
+        "tmp1": ["x4 * x2"],
+        "tmp2": ["x7 * x3"],
+        "x1": ["tmp1 + tmp2"],
+        "x5": ["x2 * x4"],
+        "x6": ["x1 - x5"]
+        
+       
+    },
+    "word-conditions": {
+        "n3": ["sameas(n2)"]
+    },
+    "code-execution":{
+        
+    }
+}

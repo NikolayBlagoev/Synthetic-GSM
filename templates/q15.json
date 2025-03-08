@@ -1,0 +1,21 @@
+{
+    "id": 14,
+    "difficulty": 1,
+    "type": "arithmetics",
+    "question": "{n1,name} е на {x1,int} години. След {x2,int} години {n2,name} ще е {x3,int} пъти по-голям{gender(n2)} от колкото {n1} е сега. На колко години е {n2}?" ,
+    "answer": "След {x2} години, {n2} ще бъде на {x3} x {x1} = <<{x3}*{x1}>> = {tmp1} години.\nСега {n2} е на {tmp1} - {x2} = <<{tmp1}-{x1}>> = {ans} години\n### {ans}" ,
+    "num-answer": "{ans}",
+    "conditions": {
+        "x1": ["randint(6,20)"],
+        "x2": ["randint(2,7)"],
+        "x3": ["randint(2,4)"],
+        "tmp1": ["x3 * x1"],
+        "ans": ["tmp1 - x2"]
+    },
+    "word-conditions": {
+        
+    },
+    "code-execution":{
+        
+    }
+}

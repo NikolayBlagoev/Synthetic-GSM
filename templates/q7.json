@@ -1,0 +1,25 @@
+{
+    "id": 6,
+    "difficulty": 3,
+    "type": "algebra",
+    "question": "Всеки ден {n1,name} {v1,activity,n1} по {x1,int} {n2,noun,v1}, а {n3,name} с {x2,int} повече. За няколко дни {v1,plural} {x4,int} {n2}. Колко {n2} e {v1,historical-singular}{gender(n1)} {n1}?",
+    "answer": "Нека x бъде броят на дните.\nНа ден заедно {v1,plural} {x1} + ({x2} + {x1}) = <<{x1}+({x2}+{x1})={x1}+{x3}={x5}>>={x5}.\nЗнаем, че {x5}x = {x4}.\nДелим двете страни на {x5}: {x5}x/{x5} = {x4}/{x5} = <<{x5}x/{x5}={x4}/{x5}>> = {x6} дни.\nНа ден {n1} {v1} по {x1,int} {n2}, следва че общо е {v1,historical-singular}{gender(n1)}: {x1}*{x6} = <<{x1}*{x6}>> = {x7}\n### {x7}" ,
+    "num-answer": "{x7}",
+    "conditions": {
+        "x1": ["randint(2,10)"],
+        "x2": ["randint(1,5)"],
+        "x6": ["randint(3,6)"],
+        "x3": ["x1 + x2"],
+        "x5": ["x3 + x1"],
+        "x4": ["x5 * x6"],
+        "x7": ["x6 * x1"]
+        
+       
+    },
+    "word-conditions": {
+        
+    },
+    "code-execution":{
+        
+    }
+}

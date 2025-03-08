@@ -1,0 +1,25 @@
+{
+    "id": 15,
+    "difficulty": 4,
+    "type": "arithmetics",
+    "question": "{n1,noun+name} има леха с площ {x1,int} кв.м. На всеки квадратен метър засажда {x2,int} {n2,noun--засажда,n1}. Всеки {x3,int} месеца продава реколта от лехата си, по {x4,int} лева за всяка бройка {n2}. Колко лева печалба на месец изкарва {n1,conj}?" ,
+    "answer": "{n1,conj} има общо {x1} x {x2} = <<{x1}*{x2}>> = {num1} {n2}.\nПечалбата от всички {n2} е {x4} x {num1} = <<{x4}*{num1}>> = {pechalba} лева.\n{n1,conj} продава реколката си 12 / {x3} = <<12/{x3}>> = {times} пъти в годината.\nСледователно, {n1,conj} прави годишна пелаба от {times} x {pechalba} = <<{times}*{pechalba}>> = {ans} лева\n### {ans}" ,
+    "num-answer": "{ans}",
+    "conditions": {
+        "x1": ["randint(10,100,10)"],
+        "x2": ["randint(2,20)"],
+        "x3": ["randint(2,6)", "12 % x3"],
+        "tmp1": ["randint(100,300,10)"],
+        "x4": ["tmp1 / 100"],
+        "num1": ["x1 * x2"],
+        "pechalba": ["x4 * num1"],
+        "times": ["12 / x3"],
+        "ans": ["times * pechalba"]
+    },
+    "word-conditions": {
+        
+    },
+    "code-execution":{
+        
+    }
+}
