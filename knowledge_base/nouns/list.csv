@@ -29,7 +29,7 @@
 27,праскова,f,праскови,object-food-tree-ingredient
 28,ловец,m,ловци,work-person
 29,глиган,m,глигани,animal-food
-30,пица,f,пици,food
+30,пица,f,пици,food-food_slice
 31,играчка,f,играчки,object
 32,инженер,m,инженери,work-person
 33,кола,f,коли,object-vehicle
@@ -57,3 +57,13 @@
 55,Лондон,m,Лондон,city
 56,самолет,m,самолети,vehicle
 57,домат,m,домати,object-food-ingredient
+58,торта,f,торти,food-food_slice
+59,пай,m,пая,food-food_slice
+60,фъстък,m,фъстъци,food-ingredient
+61,бадеми,m,бадеми,food-ingredient
+62,орех,m,орехи,food-ingredient
+63,лешник,m,лешници,food-ingredient
+64,басейн,m,басейни,containter
+65,кутия,f,кутии,object-containter
+66,чаша,f,чаши,object-containter
+67,чаша,f,чаши,object-containter
