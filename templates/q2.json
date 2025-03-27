@@ -3,7 +3,7 @@
     "difficulty": 2,
     "type": "arithmetics",
     "question": "{n1,noun+name} {v1,work,n1} {x1,int,10,100} {n2,noun,v1}. Половината {n2} {v2,is,n2} {a1,adj-shape+size,n2}, а половината {a1} {n2} {v2} {a2,adj-color,n2}. Колко са {a2,conj} {a1} {n2}?",
-    "answer": "{a1,conj} {n2} {v2} {x1}/2=<<{x1}/2>>={x2}.\n{a2,conj} {a1} {n2}: {x2}/2=<<{x2}/2={x3}.\n### {x3}" ,
+    "answer": "{a1,conj} {n2} {v2} {x1}/2=<<{x2}={x1}/2>>{x2}.\n{a2,conj} {a1} {n2}: {x2}/2=<<{x3}={x2}/2>>{x3}.\n### {x3}" ,
     "num-answer": "{x3}",
     "conditions": {
         "x1": ["x1 % 4"],
