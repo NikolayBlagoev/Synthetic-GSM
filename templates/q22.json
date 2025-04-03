@@ -1,0 +1,30 @@
+{
+    "id": 21,
+    "difficulty": 2,
+    "type": "arithmetics",
+    "question": "{n1, name}, {n2, name}, {n3, name}, {n4, name}, и {n5, name} ядат в ресторан за бързо хранене и поръчват следното: {x1, int} броя хамбургери, които струват по {x2,float} лв. всеки; {x3, int} порции пържени картофи, които струват по {x4,float} лв.; {x5, int} чаши сода, които струват по {x6,float} лв. всяка; и {x7, int} порция спагети, която струва {x8,float} лв. Колко ще плати всеки от тях, ако разделят сметката поравно?",
+    "answer": "Разходите за {x1} броя хамбургери са {x1} x {x2} = $<<{x1}*{x2}={tmp1}>>{tmp1}.\nРазходите за {x3} порции пържени картофи са {x3} x {x4} = $<<{x3}*{x4}={tmp2}>>{tmp2}.\nРазходите за {x5} чаши сода са {x5} x {x6} = $<<{x5}*{x6}={tmp3}>>{tmp3}. Разходите за {x7} порции спагети саx {x7} x {x8} = $<<{x7}*{x8}={tmp4}>>\nОбщата им сметка е {tmp1} + {tmp2} + {tmp3} + {tmp4} = $<<{tmp1}+{tmp2}+{tmp3}+{tmp4}={total_bill}>>{total_bill}.\nСледователно, всеки от петте приятели ще плати {total_bill}/5 = $<<{total_bill}/5={final_amount}>>{final_amount}.\n### {final_amount}",
+    "num-answer": "{final_amount}",
+    "conditions": {
+        "x1": ["randint(1, 5)"],
+        "x2": ["randint(1, 5)"],
+        "x3": ["randint(1, 5)"],
+        "x4": ["randint(1, 5)"],
+        "x5": ["randint(1, 5)"],
+        "x6": ["randint(1, 5)"],
+        "x7": ["randint(1, 5)"],
+        "x8": ["randint(1, 5)"],
+        "tmp1": ["{x1}*{x2}"],
+        "tmp2": ["{x3}*{x4}"],
+        "tmp3": ["{x5}*{x6}"],
+        "tmp4": ["{x7}*{x8}"],
+        "total_bill": ["{tmp1}+{tmp2}+{tmp3}+{tmp4}"],
+        "final_amount": ["{total_bill}/5"]
+    },
+    "word-conditions": {
+        
+    },
+    "code-execution":{
+        
+    }
+}
