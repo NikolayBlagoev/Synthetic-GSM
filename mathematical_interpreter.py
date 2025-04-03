@@ -3,6 +3,23 @@ import re
 from typing import List, Dict
 import random
 import math
+
+def binary_gcd(a,b):
+    if a == 0 and b != 0:
+        return b
+    if a != 0 and b == 0:
+        return a
+    if a % 2 == 0 and b % 2 == 0:
+        return 2*binary_gcd(a >> 1, b >> 1)
+    if a % 2 == 1 and b % 2 == 0:
+        return binary_gcd(a, b >> 1)
+    if a % 2 == 0 and b % 2 == 1:
+        return binary_gcd(a >> 1, b)
+    if a > b:
+        return binary_gcd(a - b, b)
+    if b > a:
+        return binary_gcd(a, b - a)
+    return 1
 class Operation(ABC):
     @abstractmethod
     def check(self,vl,all_current):
@@ -34,6 +51,91 @@ class NonPrime(Operation):
         return False
     def get(self,all_current):
         return None
+
+class GCD(Operation):
+    def __init__(self, a, b):
+        self.get_vl = False
+        self.a = a
+        self.b = b
+    
+    def check(self,vl,all_current):
+        b = None
+        if isinstance(self.b,int):
+            
+            b = self.b
+        elif isinstance(self.b, str):
+            if self.b not in all_current:
+                return False
+            b = all_current[self.b]
+        a = None
+        if isinstance(self.a,int):
+            a = self.a
+        elif isinstance(self.a, str):
+            if self.a not in all_current:
+                return False
+            a = all_current[self.a]
+        return vl == binary_gcd(a,b)
+        
+    def get(self,all_current):
+        b = None
+        if isinstance(self.b,int):
+            
+            b = self.b
+        elif isinstance(self.b, str):
+            if self.b not in all_current:
+                return None
+            b = all_current[self.b]
+        a = None
+        if isinstance(self.a,int):
+            a = self.a
+        elif isinstance(self.a, str):
+            if self.a not in all_current:
+                return None
+            a = all_current[self.a]
+        return binary_gcd(a,b)
+
+
+class LCM(Operation):
+    def __init__(self, a, b):
+        self.get_vl = False
+        self.a = a
+        self.b = b
+    
+    def check(self,vl,all_current):
+        b = None
+        if isinstance(self.b,int):
+            
+            b = self.b
+        elif isinstance(self.b, str):
+            if self.b not in all_current:
+                return False
+            b = all_current[self.b]
+        a = None
+        if isinstance(self.a,int):
+            a = self.a
+        elif isinstance(self.a, str):
+            if self.a not in all_current:
+                return False
+            a = all_current[self.a]
+        return vl == a*b/binary_gcd(a,b)
+        
+    def get(self,all_current):
+        b = None
+        if isinstance(self.b,int):
+            
+            b = self.b
+        elif isinstance(self.b, str):
+            if self.b not in all_current:
+                return None
+            b = all_current[self.b]
+        a = None
+        if isinstance(self.a,int):
+            a = self.a
+        elif isinstance(self.a, str):
+            if self.a not in all_current:
+                return None
+            a = all_current[self.a]
+        return a*b/binary_gcd(a,b)
 
 class Modulo(Operation):
     def __init__(self,b,direction):
@@ -534,6 +636,12 @@ def get_all_numbers(q,a,constraints):
             elif "floor" in c:
                 vls = list(map(lambda el: el.strip(), c.split("floor")))
                 ls.append(FloorOp(vls[1]))
+            elif "gcd" in c:
+                vls = list(map(lambda el: el.strip(), c.split("gcd")))
+                ls.append(GCD(vls[1],vls[2]))
+            elif "lcm" in c:
+                vls = list(map(lambda el: el.strip(), c.split("lcm")))
+                ls.append(LCM(vls[1],vls[2]))
         mem[k].extend(ls)
 
 
