@@ -23,10 +23,10 @@
 21,задача,f,задачи,object-work
 22,улица,f,улици,object-place
 23,детелина,f,детелини,object-cover-flower
-24,череша,f,череши,object-food-tree-ingredient
-25,ябълка,f,ябълки,object-food-tree-ingredient
-26,картоф,m,картофи,object-food-ingredient
-27,праскова,f,праскови,object-food-tree-ingredient
+24,череша,f,череши,object-food-tree-ingredient-crop
+25,ябълка,f,ябълки,object-food-tree-ingredient-crop
+26,картоф,m,картофи,object-food-ingredient-crop
+27,праскова,f,праскови,object-food-tree-ingredient-crop
 28,ловец,m,ловци,work-person
 29,глиган,m,глигани,animal-food
 30,пица,f,пици,food-food_slice
@@ -46,9 +46,9 @@
 44,риза,f,ризи,object-clothes
 45,лале,m,лалета,object-flower-cover
 46,патица,f,патици,animal-food-bird
-47,кокошка,f,кокошки,animal-food-bird
+47,кокошка,f,кокошки,animal-food-bird-animal_farm
 48,яйце,n,яйца,food
-49,пуйка,f,пуйки,animal-food-bird
+49,пуйка,f,пуйки,animal-food-bird-animal_farm
 50,влак,m,влакове,vehicle
 51,автобус,m,автобуси,vehicle
 52,Сан Франциско,m,Сан Франциско,city
@@ -56,7 +56,7 @@
 54,Варна,m,Варна,city
 55,Лондон,m,Лондон,city
 56,самолет,m,самолети,vehicle
-57,домат,m,домати,object-food-ingredient
+57,домат,m,домати,object-food-ingredient-crop
 58,торта,f,торти,food-food_slice
 59,пай,m,пая,food-food_slice
 60,фъстък,m,фъстъци,food-ingredient
@@ -66,4 +66,12 @@
 64,басейн,m,басейни,containter
 65,кутия,f,кутии,object-containter
 66,чаша,f,чаши,object-containter
-67,чаша,f,чаши,object-containter
+67,сено,m,сена,crop
+68,кон,m,коне,animal-animal_farm
+69,прасе,m,прасета,animal-animal_farm
+70,крава,f,крави,animal-animal_farm
+71,заек,m,зайци,animal-animal_farm
+72,морков,m,моркови,crop-food-ingredient
+73,зелка,f,зелки,crop-food-ingredient
+74,ряпа,f,репи,crop-food-ingredient
+75,лук,m,лука,crop-food-ingredient
