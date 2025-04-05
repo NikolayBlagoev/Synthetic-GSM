@@ -1,0 +1,19 @@
+{
+    "id": 18,
+    "difficulty": 1,
+    "type": "arithmetics",
+    "question": "{n1,name} се наяжда с {x1,int} {n2,noun-object+food+tree+ingredient,plural}. {n3, name} се наяжда с два пъти повече {n2}. Колко {n2} трябва да си купят {n1} и {n3}, за да се наядат?" ,
+    "answer": "Ако {n1} се наяжда с {x1} {n2}, то {n3} се наяжда с {x1}*2 {n2} = <<{x1}*2={x2}>>{x2} {n2}.\nЗаедно трябва да си купят {x1 + x2} {n2} = <<{x1 + x2}={ans}>>{ans} {n2}, за да се наядат.\n### {ans}",
+    "num-answer": "{ans}",
+    "conditions": {
+        "x1": ["randint(1, 10)"],
+        "x2": ["x1 * 2"],
+        "ans": ["x1 + x2"]
+    },
+    "word-conditions": {
+        
+    },
+    "code-execution":{
+        
+    }
+}
