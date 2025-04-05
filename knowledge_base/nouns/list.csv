@@ -75,3 +75,16 @@
 73,зелка,f,зелки,crop-food-ingredient
 74,ряпа,f,репи,crop-food-ingredient
 75,лук,m,лука,crop-food-ingredient
+76,казан,m,казани,object-containter
+77,катерене,s,катерене,sport
+78,ски,s,ски,sport
+79,бягане,s,бягане,sport
+80,голф,s,голф,sport
+81,вода,f,води,liquid
+82,дизел,m,дизел,liquid
+83,бензин,m,бензин,liquid
+84,кока-кола,f,кока-коли,drink
+85,сок,m,сокове,drink
+86,вино,s,вина,drink
+87,уиски,s,уискита,drink
+88,чай,m,чая,drink
