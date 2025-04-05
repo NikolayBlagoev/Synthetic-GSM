@@ -17,6 +17,11 @@
         "tmp4": ["{x4}*{x2}"],
         "tmp5": ["{tmp2}+{tmp3}+{tmp4}"],
         "ans": ["{tmp5}/{x5}"]
+    },
+    "word-conditions": {
+        
+    },
+    "code-execution":{
+        
     }
-    
 }

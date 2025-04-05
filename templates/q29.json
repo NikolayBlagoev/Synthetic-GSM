@@ -10,6 +10,11 @@
         "tmp1": ["3/4*{x1}"],
         "tmp2": ["{x1}+{tmp1}"],
         "ans": ["{x1}+{tmp1}+{tmp2}"]
+    },
+    "word-conditions": {
+        
+    },
+    "code-execution":{
+        
     }
-    
 }

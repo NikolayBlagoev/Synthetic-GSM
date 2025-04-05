@@ -12,6 +12,11 @@
         "tmp1": ["{x1}-{x2}"],
         "tmp2": ["{x1}-{x3}"],
         "ans": ["{tmp1}+{tmp2}"]
+    },
+    "word-conditions": {
+        
+    },
+    "code-execution":{
+        
     }
-    
 }
