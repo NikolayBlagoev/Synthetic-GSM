@@ -15,7 +15,7 @@ def binary_gcd(a,b):
         return binary_gcd(a, b >> 1)
     if a % 2 == 0 and b % 2 == 1:
         return binary_gcd(a >> 1, b)
-    if a > b:
+    if a >= b:
         return binary_gcd(a - b, b)
     if b > a:
         return binary_gcd(a, b - a)
