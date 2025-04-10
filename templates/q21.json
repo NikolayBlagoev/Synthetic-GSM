@@ -9,9 +9,9 @@
         "x1": ["randint(1, 100)"],
         "x2": ["randint(1, 1000)"],
         "x3": ["randint(1, 99)"],
-        "tmp1": ["{x3}*{x2}"],
-        "tmp2": ["{x1}-{x3}"],
-        "ans": ["{tmp1}/{tmp2}"]
+        "tmp1": ["x3 * x2"],
+        "tmp2": ["x1 - x3"],
+        "ans": ["tmp1 / tmp2"]
     },
     "word-conditions": {
         

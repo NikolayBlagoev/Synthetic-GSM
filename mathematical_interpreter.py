@@ -597,6 +597,7 @@ def get_all_numbers(q,a,constraints):
         if k not in mem:
             mem[k] = []
         for c in v:
+            c = c.replace("{","").replace("}","")
             if c == "non-prime":
                 ls.append(NonPrime())
             elif "randint" in c:
@@ -669,7 +670,7 @@ def get_all_numbers(q,a,constraints):
         while len(settled) < len(mem):
             
             for k,v in mem.items():
-                # print(settled)
+                print(settled)
                 if k in settled:
                     continue
                 
