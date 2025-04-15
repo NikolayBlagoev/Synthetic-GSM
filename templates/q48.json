@@ -6,9 +6,9 @@
     "answer": "{n1} = ({x1}) * {x2} = <<({x1})*{x2}={tmp1}>>{tmp1}\n{n2} = ({x3}) * {x4} = <<({x3})*{x4}={tmp2}>>{tmp2}\n{tmp1} + {tmp2} = <<{tmp1}+{tmp2}={ans}>>{ans}\nЗаедно те изядоха {ans} {n3}.\n### {ans}",
     "num-answer": "{ans}",
     "conditions": {
-        "x1": ["randint(1, 5)"],
+        "x1": ["randint(2, 5)"],
         "x2": ["randint(10, 20)"],
-        "x3": ["randint(1, 5)"],
+        "x3": ["randint(2, 5)"],
         "x4": ["randint(10, 20)"],
         "tmp1": ["{x1}*{x2}"],
         "tmp2": ["{x3}*{x4}"],

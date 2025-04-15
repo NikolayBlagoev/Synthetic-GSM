@@ -48,7 +48,7 @@ class RandomFloat(Operation):
     def check(self,vl,all_current):
         return vl >= self.a and vl <= self.b and (vl - self.a) % self.skip == 0
     def get(self,all_current):
-        return random.uniform(self.a,self.b,self.skip)
+        return random.uniform(self.a,self.b)
 
 class NonPrime(Operation):
     def __init__(self):
@@ -606,7 +606,7 @@ def get_all_numbers(q,a,constraints):
                     vls.append("1")
                 ls.append(RandomInteger(int(vls[0]), int(vls[1]), int(vls[2])))
             elif "randfloat" in c:
-                vls = c[8:-1].split(",")
+                vls = c[10:-1].split(",")
                 if len(vls) == 2:
                     vls.append("1")
                 ls.append(RandomFloat(float(vls[0]), float(vls[1]), float(vls[2])))
