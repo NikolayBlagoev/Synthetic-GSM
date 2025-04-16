@@ -621,6 +621,57 @@ class Remainder(Operation):
             return None
 
         return a%b
+    
+class Round(Operation):
+    def __init__(self,a, b):
+        self.get_vl = True
+        self.a = a
+        self.b = b
+    def check(self, vl, all_current):
+        a = None
+        if isinstance(self.b,int):
+            a = self.b
+        
+        elif isinstance(self.b, str):
+            
+            if self.a not in all_current:
+                return False
+            a = all_current[self.a]
+
+        b = None
+        if isinstance(self.b,int):
+            b = self.b
+        
+        elif isinstance(self.b, str):
+            
+            if self.b not in all_current:
+                return False
+            b = all_current[self.b]
+
+        return round(a,b)
+
+    def get(self, all_current):
+        a = None
+        if isinstance(self.b,int):
+            a = self.b
+        
+        elif isinstance(self.b, str):
+            
+            if self.a not in all_current:
+                return False
+            a = all_current[self.a]
+
+        b = None
+        if isinstance(self.b,int):
+            b = self.b
+        
+        elif isinstance(self.b, str):
+            
+            if self.b not in all_current:
+                return None
+            b = all_current[self.b]
+
+        return round(a,b)
 
 
 def get_all_numbers(q,a,constraints):
@@ -718,6 +769,9 @@ def get_all_numbers(q,a,constraints):
             elif "rem" in c:
                 vls = list(map(lambda el: el.strip(), c.split("rem")))
                 ls.append(Remainder(vls[0],vls[1]))
+            elif "round" in c:
+                vls = list(map(lambda el: el.strip(), c.split("round")))
+                ls.append(Round(vls[0],vls[1]))
         mem[k].extend(ls)
 
 
