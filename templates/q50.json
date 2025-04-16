@@ -7,8 +7,8 @@
     "num-answer": "{ans}",
     "conditions": {
         "x1": ["randint(100, 200)"],
-        "x2": ["randfloat(1, 2)"],
-        "x3": ["randfloat(1, 1.5)"],
+        "x2": ["randfloat(1, 2, 2)"],
+        "x3": ["randfloat(1, 1.5, 2)"],
         "x4": ["randint(1, 10)"],
         "tmp1": ["{x1}*{x2}"],
         "tmp2": ["{tmp1}*{x3}"],

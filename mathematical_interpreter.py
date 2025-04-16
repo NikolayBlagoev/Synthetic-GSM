@@ -40,15 +40,16 @@ class RandomInteger(Operation):
         return random.randrange(self.a,self.b,self.skip)
     
 class RandomFloat(Operation):
-    def __init__(self, a, b, skip):
+    def __init__(self, a, b, f_point):
         self.get_vl = True
         self.a = a
         self.b = b+1
-        self.skip = skip
+        self.f_point = f_point
     def check(self,vl,all_current):
-        return vl >= self.a and vl <= self.b and (vl - self.a) % self.skip == 0
+        return vl >= self.a and vl <= self.b
     def get(self,all_current):
-        return random.uniform(self.a,self.b)
+        temp = random.uniform(self.a,self.b)
+        return round(temp, self.f_point)
 
 class NonPrime(Operation):
     def __init__(self):
@@ -566,6 +567,61 @@ class WholeDivAll(Operation):
                 sm = sm//all_current[dp]
         return sm
 
+class Remainder(Operation):
+    def __init__(self,a, b):
+        self.get_vl = True
+        self.a = a
+        self.b = b
+    def check(self, vl, all_current):
+        a = None
+        if isinstance(self.b,int):
+            a = self.b
+        
+        elif isinstance(self.b, str):
+            
+            if self.a not in all_current:
+                return False
+            a = all_current[self.a]
+
+        b = None
+        if isinstance(self.b,int):
+            b = self.b
+        
+        elif isinstance(self.b, str):
+            
+            if self.b not in all_current:
+                return False
+            b = all_current[self.b]
+        if a < b:
+            return False
+
+        return a%b
+
+    def get(self, all_current):
+        a = None
+        if isinstance(self.b,int):
+            a = self.b
+        
+        elif isinstance(self.b, str):
+            
+            if self.a not in all_current:
+                return False
+            a = all_current[self.a]
+
+        b = None
+        if isinstance(self.b,int):
+            b = self.b
+        
+        elif isinstance(self.b, str):
+            
+            if self.b not in all_current:
+                return None
+            b = all_current[self.b]
+        if a < b:
+            return None
+
+        return a%b
+
 
 def get_all_numbers(q,a,constraints):
     mem: Dict[str,List[Operation]] = {}
@@ -609,7 +665,7 @@ def get_all_numbers(q,a,constraints):
                 vls = c[10:-1].split(",")
                 if len(vls) == 2:
                     vls.append("1")
-                ls.append(RandomFloat(float(vls[0]), float(vls[1]), float(vls[2])))
+                ls.append(RandomFloat(float(vls[0]), float(vls[1]), int(vls[2])))
             elif "+" in c:
                 vls = list(map(lambda el: el.strip(), c.split("+")))
                 ls.append(SumAll(vls))
@@ -659,6 +715,9 @@ def get_all_numbers(q,a,constraints):
             elif "lcm" in c:
                 vls = list(map(lambda el: el.strip(), c.split("lcm")))
                 ls.append(LCM(vls[1],vls[2]))
+            elif "rem" in c:
+                vls = list(map(lambda el: el.strip(), c.split("rem")))
+                ls.append(Remainder(vls[0],vls[1]))
         mem[k].extend(ls)
 
 
