@@ -160,6 +160,7 @@ class Modulo(Operation):
         
     def check(self,vl,all_current):
         b = None
+        
         if isinstance(self.b,int):
             
             b = self.b
@@ -167,6 +168,7 @@ class Modulo(Operation):
             if self.b not in all_current:
                 return False
             b = all_current[self.b]
+        print("checking", b, vl)
         if self.direction == 0:
             
             return vl % b == 0
@@ -211,7 +213,7 @@ class LT(Operation):
             if self.b not in all_current:
                 return False
             b = all_current[self.b]
-        
+        # print("is ",b,">",vl)
         return b > vl
         
     def get(self,all_current):
@@ -499,6 +501,8 @@ class DivAll(Operation):
             if sm == None:
                 sm =  all_current[dp]
             else: 
+                if all_current[dp] == 0:
+                    return False
                 sm = sm/all_current[dp]
         return sm == vl
     def get(self,all_current):
@@ -516,6 +520,9 @@ class DivAll(Operation):
             if sm == None:
                 sm = all_current[dp]
             else: 
+                if all_current[dp] == 0:
+                    print("getting ")
+                    return None
                 sm = sm/all_current[dp]
         return sm
 
@@ -786,9 +793,9 @@ def get_all_numbers(q,a,constraints):
     while len(solutions) < 5:
         settled = {}
         while len(settled) < len(mem):
-            
+            print(settled)
             for k,v in mem.items():
-                print(settled)
+                
                 if k in settled:
                     continue
                 
@@ -800,11 +807,14 @@ def get_all_numbers(q,a,constraints):
                 if ret != None:
                     
                     settled[k] = ret
+            break
         success = True
         for k,v in mem.items():
             if not success:
                 break
+            # print("checking..")
             for c in v:
+
                 success = c.check(settled[k],settled)
                 
                 if success == False:
