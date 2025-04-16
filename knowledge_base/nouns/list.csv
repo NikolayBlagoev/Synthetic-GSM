@@ -74,7 +74,7 @@
 72,морков,m,моркови,crop-food-ingredient
 73,зелка,f,зелки,crop-food-ingredient
 74,ряпа,f,репи,crop-food-ingredient
-75,лук,m,лука,crop-food-ingredient
+75,чушка,m,чушки,crop-food-ingredient
 76,казан,m,казани,object-containter
 77,катерене,s,катерене,sport
 78,ски,s,ски,sport
@@ -90,3 +90,4 @@
 88,чай,m,чая,drink
 89,списание,n,списания,book-object
 90,учебник,m,учебници,book-object
+91,шапка,f,шапки,clothes-object
