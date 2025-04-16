@@ -755,22 +755,27 @@ def get_all_numbers(q,a,constraints):
                 else:
                     ls.append(Modulo(vls[1],0))
             elif "ceil" in c:
-                vls = list(map(lambda el: el.strip(), c.split("ceil")))
+                c = c[3:]
+                vls = list(map(lambda el: el.strip(), c.split(" ")))
                 ls.append(CeilOp(vls[1]))
             elif "floor" in c:
-                vls = list(map(lambda el: el.strip(), c.split("floor")))
+                c = c[len("floor"):]
+                vls = list(map(lambda el: el.strip(), c.split(" ")))
                 ls.append(FloorOp(vls[1]))
             elif "gcd" in c:
-                vls = list(map(lambda el: el.strip(), c.split("gcd")))
+                c = c[len("gcd"):]
+                vls = list(map(lambda el: el.strip(), c.split(" ")))
                 ls.append(GCD(vls[1],vls[2]))
             elif "lcm" in c:
-                vls = list(map(lambda el: el.strip(), c.split("lcm")))
+                c = c[len("lcm"):]
+                vls = list(map(lambda el: el.strip(), c.split(" ")))
                 ls.append(LCM(vls[1],vls[2]))
             elif "rem" in c:
                 vls = list(map(lambda el: el.strip(), c.split("rem")))
                 ls.append(Remainder(vls[0],vls[1]))
             elif "round" in c:
-                vls = list(map(lambda el: el.strip(), c.split("round")))
+                c = c[len("round"):]
+                vls = list(map(lambda el: el.strip(), c.split(" ")))
                 ls.append(Round(vls[0],vls[1]))
         mem[k].extend(ls)
 
