@@ -655,7 +655,7 @@ class Round(Operation):
                 return False
             b = all_current[self.b]
 
-        return round(a,b)
+        return round(a,b) == vl
 
     def get(self, all_current):
         a = None
@@ -812,11 +812,13 @@ def get_all_numbers(q,a,constraints):
         for k,v in mem.items():
             if not success:
                 break
-            # print("checking..")
+            print("checking..",k)
             for c in v:
-
+                if k not in settled:
+                    success = False
+                    break
                 success = c.check(settled[k],settled)
-                
+                settled[k] = round(settled[k]*1000) / 1000
                 if success == False:
                     break
         if success:    

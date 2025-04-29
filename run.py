@@ -21,6 +21,7 @@ question_count = int(argv[2])
 duplicate_check = {}
 for _ in range(question_count):
     for i in range(rng[0],rng[1]):
+        print(i)
         with open(f"templates/q{i}.json","r",encoding="utf-8") as fp:
             tmp = json.load(fp)
             word_solutions = get_all_words(tmp["question"],tmp["answer"],tmp["word-conditions"],kb)
