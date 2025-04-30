@@ -51,10 +51,10 @@
 49,пуйка,f,пуйки,animal-food-bird-animal_farm
 50,влак,m,влакове,vehicle
 51,автобус,m,автобуси,vehicle
-52,Сан Франциско,m,Сан Франциско,city
-53,София,m,София,city
-54,Варна,m,Варна,city
-55,Лондон,m,Лондон,city
+52,Сан Франциско,m,Сан Франциско,city-area
+53,София,m,София,city-area
+54,Варна,m,Варна,city-area
+55,Лондон,m,Лондон,city-area
 56,самолет,m,самолети,vehicle
 57,домат,m,домати,object-food-ingredient-crop
 58,торта,f,торти,food-food_slice
@@ -64,8 +64,8 @@
 62,орех,m,орехи,food-ingredient
 63,лешник,m,лешници,food-ingredient
 64,басейн,m,басейни,container
-65,кутия,f,кутии,object-container
-66,чаша,f,чаши,object-container
+65,кутия,f,кутии,object-container-handmade
+66,чаша,f,чаши,object-container-handmade
 67,сено,m,сена,crop
 68,кон,m,коне,animal-animal_farm
 69,прасе,m,прасета,animal-animal_farm
@@ -90,4 +90,21 @@
 88,чай,m,чая,drink
 89,списание,n,списания,book-object
 90,учебник,m,учебници,book-object
-91,шапка,f,шапки,clothes-object
+91,шапка,f,шапки,clothes-object92,квартал,m,квартали,area
+93,комплекс,m,комплекси,area
+94,блок,m,блокове,place
+95,град,m,градове,area
+96,село,m,села,area
+97,пресечка,f,пресечки,place
+98,кооперация,f,кооперации,area
+99,щат,m,щати,area
+100,община,f,общини,area
+101,магазин,m,магазин,place
+102,вход,m,входа,place
+103,гердан,m,гердани,handmade
+104,гривна,f,гривни,handmade
+105,рокля,f,рокли,handmade
+106,икона,f,икони,handmade
+107,купа,f,купи,handmade-container
+108,картина,f,картини,handmade
+109,колан,m,колани,handmade
