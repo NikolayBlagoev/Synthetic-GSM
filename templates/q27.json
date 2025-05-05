@@ -1,0 +1,21 @@
+{
+    "id": 51,
+    "difficulty": 1,
+    "type": "arithmetics",
+    "question": "{n1,name} купи {x1,int} кутии {n2,noun-food,plural}. Всяка кутия има {x2,int} {n2}, и тежи {x3,float} килограма. Колко тежат всички {n2}, които {n1} купи?",
+    "answer": "{n1} купи общо:\n<<{x1}{x2}={tmp1}>> {tmp1} {n2}\nTe тежат общо: <<{tmp1}{x3}={ans}>> {ans}\nСледователно {n1} купи {ans} килограма {n2}.\n### {ans}",
+    "num-answer": "{ans}",
+    "conditions": {
+        "x1": ["randint(2, 5)"],
+        "x2": ["randint(6, 12)"],
+        "x3": ["randfloat(0.1, 0.5, 2)"],
+        "tmp1": ["{x1}*{x2}"],
+        "ans": ["{tmp1}*{x3}"]
+    },
+    "word-conditions": {
+        
+    },
+    "code-execution":{
+        
+    }
+}

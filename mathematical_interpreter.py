@@ -37,7 +37,7 @@ class RandomInteger(Operation):
     def check(self,vl,all_current):
         return vl >= self.a and vl <= self.b and (vl - self.a) % self.skip == 0
     def get(self,all_current):
-        return random.randrange(self.a,self.b,self.skip)
+        return int(random.randrange(self.a,self.b,self.skip))
     
 class RandomFloat(Operation):
     def __init__(self, a, b, f_point):
@@ -521,8 +521,8 @@ class DivAll(Operation):
                 sm = all_current[dp]
             else: 
                 if all_current[dp] == 0:
-                    print("getting ")
-                    return None
+                    
+                    return False
                 sm = sm/all_current[dp]
         return sm
 
@@ -792,34 +792,44 @@ def get_all_numbers(q,a,constraints):
     attempts = 0
     while len(solutions) < 5:
         settled = {}
-        while len(settled) < len(mem):
-            print(settled)
+        flag = True
+        while len(settled) < len(mem) and flag:
+            # print("SETTLED",settled)
+            
             for k,v in mem.items():
                 
                 if k in settled:
                     continue
-                
+                # print("getting",k)
                 ret = None
                 for c in v:
                     ret = c.get(settled)
                     if ret != None:
                         break
+                if ret == False:
+                    flag = False
+                    break
+
                 if ret != None:
                     
                     settled[k] = ret
-            break
+
+            
         success = True
         for k,v in mem.items():
             if not success:
                 break
-            print("checking..",k)
+            # print("checking..",k)
             for c in v:
                 if k not in settled:
                     success = False
                     break
                 success = c.check(settled[k],settled)
                 settled[k] = round(settled[k]*1000) / 1000
+                if settled[k] % 1 == 0:
+                    settled[k] = int(settled[k])
                 if success == False:
+                    print("failed ",k)
                     break
         if success:    
             attempts = 0
@@ -827,6 +837,6 @@ def get_all_numbers(q,a,constraints):
         else:
             attempts += 1
 
-        if attempts == 20:
+        if attempts == 50:
             break
     return solutions

@@ -2,7 +2,7 @@
     "id": 45,
     "difficulty": 1,
     "type": "arithmetics",
-    "question": "{n1,noun-container} има {x1, int} литра {n2,noun-liquid}, с цена {x2, float} лева за литъра. {n1} може да побере {x3, int} литра. Колко ще струва {n1} до горе с {n2}?",
+    "question": "{n1,noun-container} има {x1, int} литра {n2,noun-liquid}, с цена {x2, float} лева за литъра. {n1} може да побере {x3, int} литра. Колко ще струва да се напълни {n1,conj} до горе с {n2}?",
     "answer": "Един литър {n2} струва {x2} / {x1} = <<{x2}/{x1}={tmp1}>>{tmp1} лева.\n{x3} литра {n2} ще струват {tmp1} * {x3} = <<{tmp1}*{x3}={ans}>>{ans} лева.\n### {ans}",
     "num-answer": "{ans}",
     "conditions": {

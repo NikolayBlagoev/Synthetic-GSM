@@ -7,8 +7,9 @@
     "num-answer": "{ans}",
     "conditions": {
         "x1": ["randint(50,250)"],
-        "tmp1": ["0.75*{x1}"],
-        "tmp2": ["{x1}+{tmp1}"],
+        "tmp1": ["3*{x1}"],
+        "tmp3": ["{x1} / 4"],
+        "tmp2": ["{x1}+{tmp3}"],
         "ans": ["{x1}+{tmp1}+{tmp2}"]
     },
     "word-conditions": {
