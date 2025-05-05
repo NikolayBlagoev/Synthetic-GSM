@@ -17,7 +17,7 @@
         "tmp3": ["{x4}*{x5}"],
         "tmp4": ["{tmp3}+{tmp2}"],
         "tmp5": ["{x1}-{tmp4}"],
-        "ans": ["{tmp5}/{x6}"]
+        "ans": ["{tmp5}/{x6}", "> 0"]
     },
     "word-conditions": {
         

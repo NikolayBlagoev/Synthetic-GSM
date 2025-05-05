@@ -12,7 +12,7 @@
         "x4": ["randint(1,5)"],
         "tmp1": ["{x2}-{x1}"],
         "tmp2": ["{x4}*{tmp1}"],
-        "ans": ["{x3}*{tmp2}"]
+        "ans": ["{x3}*{tmp2}","> 0"]
     },
     "word-conditions": {
         

@@ -20,7 +20,7 @@ else:
 question_count = int(argv[2])
 duplicate_check = {}
 import pandas as pd
-df = {'question': [], 'answer': [], 'type': []}
+df = {'question': [], 'answer': [], 'type': [], 'num_answer': []}
 
 for _ in range(question_count):
     for i in range(rng[0],rng[1]):
@@ -61,12 +61,13 @@ for _ in range(question_count):
                     num_answer,_,_ = process_string(tmp["num-answer"],ws,ns,prev_state,prev_noun,code_results,kb)
                     num_answer = float(num_answer)
                     # print(i, "Q:", question,"\n A: ",answer)
-                    df["question"].append(question_count)
+                    df["question"].append(question)
                     df["answer"].append(answer)
                     df["type"].append(tmp["type"])
+                    df["num_answer"].append(num_answer)
                     # print("--------------")
                     break
 df = pd.DataFrame(data=df)
-df.to_csv("results/data.csv")
+df.to_csv("results/test.csv", index=False)
                 
             
