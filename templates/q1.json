@@ -2,7 +2,7 @@
     "id": 0,
     "difficulty": 3,
     "type": "arithmetics",
-    "question": "През първия ден {n1,name} {v1,work,n1} {x1,int,10,42,2} {n2,noun,v1}. През втория ден {v1} {x2,int-str} пъти по-малко. През третия ден {v1} с {x3,int,5,15} повече {n2} от предишния. Колко {n2} {v2,is,n2} {v1,passive} общо?",
+    "question": "През първия ден {n1,name+noun} {v1,work,n1} {x1,int,10,42,2} {n2,noun,v1}. През втория ден {v1} {x2,int-str} пъти по-малко. През третия ден {v1} с {x3,int,5,15} повече {n2} от предишния. Колко {n2} {v2,is,n2} {v1,passive} общо?",
     "answer": "През втория ден {n1,conj} {v1} {x1}/{x2,int} {n2} = <<{x4}={x1}/{x2,int}>> {x4} {n2}.\nПрез третия {v2} {v1,passive} {x4} + {x3} = <<{x5}={x4}+{x3}>> {x5} {n2}.\nОбщо за трите дни, {v2} {v1,passive} {x1} + {x4} + {x5} = <<{x6}={x1}+{x4}+{x5}>>{x6} {n2}.\n### {x6}" ,
     "num-answer": "{x6}",
     "conditions": {
