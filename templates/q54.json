@@ -1,0 +1,21 @@
+{
+    "id": 53,
+    "difficulty": 1,
+    "type": "arithmetics",
+    "question": "{n1,name} {v1,verb-craft} за {x1, int} минути по {n2,noun-handmade}. Ако след това трябва да {v2,verb-craft} всички и това отнема {x2,int-str} пъти повече време, за колко време ще успее да {v1} и {v2} {x3} {n1}?",
+    "answer": "За да {v1} и {v2} 1 {n2}, ще трябва {x1}+{x2} = <<{x1}+{x2}={tmp1}>>{tmp1} мин. За да {v1} и {v2} {x3} {n2} ще трябва {tmp1}*{x3} = <<{tmp1}*{x3}={ans}>>{ans} минути. ### {ans}",
+    "num-answer": "{ans}",
+    "conditions": {
+        "x1": ["randint(2, 10)"],
+        "x2": ["randint(1, 5)"],
+        "x3": ["randint(15, 40)"],
+        "tmp1": ["{x1}+{x2}"],
+        "ans": ["{tmp1}*{x3}"]
+    },
+    "word-conditions": {
+
+    },
+    "code-execution":{
+
+    }
+}

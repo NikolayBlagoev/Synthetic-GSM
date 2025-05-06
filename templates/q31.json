@@ -2,13 +2,14 @@
     "id": 30,
     "difficulty": 1,
     "type": "arithmetics",
-    "question": "Градина с {n1,noun,crop} е {x1,int-str} пъти по-голяма от градина с {n2,noun,crop}. Ако 1/{x2,int} част от градината с {n1} e {x3,int} квадратни см, колко е общата площ на градината на {n2} в квадратни см?",
-    "answer": "Цялата градина с {n1} е {x3}*{x2} = <<{x3}*{x2}={tmp1}>>{tmp1} квадратни см.\nГрадината с {n2} е {tmp1}/{x1} = <<{tmp1}/{x1}={ans}>>{ans} квадратни см.\n### {ans}",
+    "question": "{n10,noun-garden} с {n1,noun-crop,plural} е {x1,int-str} пъти по-голяма от {n10} с {n2,noun-crop,plural}. Ако 1/{x2,int} част от {n10,conj} с {n1} e {x3,int} квадратни см, колко е общата площ на {n10,conj} на {n2} в квадратни см?",
+    "answer": "Цялата {n10} с {n1} е {x3}*{x2} = <<{x3}*{x2}={tmp1}>>{tmp1} квадратни см.\n{n10,conj} с {n2} е {tmp1}/{x1} = <<{tmp1}/{x1}={ans}>>{ans} квадратни см.\n### {ans}",
     "num-answer": "{ans}",
     "conditions": {
+        "x1": ["randint(1, 5)"],
         "x2": ["randint(1, 10)"],
         "x3": ["randint(100, 1000)"],
-        "tmp1": ["{x3}*{x2}"],
+        "tmp1": ["{x3}*{x2}", "tmp1 % x1"],
         "ans": ["{tmp1}/{x1}"]
     },
     "word-conditions": {

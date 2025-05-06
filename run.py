@@ -19,8 +19,12 @@ else:
     rng[1] = rng[0]  + 1
 question_count = int(argv[2])
 duplicate_check = {}
+import pandas as pd
+df = {'question': [], 'answer': [], 'type': [], 'num_answer': []}
+
 for _ in range(question_count):
     for i in range(rng[0],rng[1]):
+        print(i)
         with open(f"templates/q{i}.json","r",encoding="utf-8") as fp:
             tmp = json.load(fp)
             word_solutions = get_all_words(tmp["question"],tmp["answer"],tmp["word-conditions"],kb)
@@ -56,9 +60,14 @@ for _ in range(question_count):
                     answer = post_process(answer)
                     num_answer,_,_ = process_string(tmp["num-answer"],ws,ns,prev_state,prev_noun,code_results,kb)
                     num_answer = float(num_answer)
-                    print(i, "Q:", question,"\n A: ",answer)
+                    # print(i, "Q:", question,"\n A: ",answer)
+                    df["question"].append(question)
+                    df["answer"].append(answer)
+                    df["type"].append(tmp["type"])
+                    df["num_answer"].append(num_answer)
                     # print("--------------")
                     break
-print(len(duplicate_check))
+df = pd.DataFrame(data=df)
+df.to_csv("results/test.csv", index=False)
                 
             

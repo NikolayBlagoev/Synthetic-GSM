@@ -1,0 +1,24 @@
+{
+    "id": 50,
+    "difficulty": 1,
+    "type": "arithmetics",
+    "question": "Има {x1, int} {n1,noun-place} на {n2,noun-area}. На всички {n1} има между {x2,int} и {x3,int} {n3,noun-f{tmp2}-{x1}lower}. Колко средно {n3} има на {x4,int} {n2}?",
+    "answer": "Едн{gender(n1)} има средно ({x2}+{x3})/2 = <<{x2}+{x3}={tmp1}>><<{tmp1}/2={tmp2}>>{tmp2} {n3}. Има общо {x1}*{x4} = <<{x1}*{x4}={tmp3}>>{tmp3} {n1}. Средно има {tmp3}*{tmp2} = <<{tmp3}*{tmp2}={ans}>>{ans} {n3}. ### {ans} ",
+    "num-answer": "{ans}",
+    "conditions": {
+        "x1": ["randint(2, 5)"],
+        "x2": ["randint(5, 15)"],
+        "x3": ["randint(15, 20)"],
+        "x4": ["randint(2, 5)"],
+        "tmp1": ["{x2}+{x3}"],
+        "tmp2": ["{tmp1}/2"],
+        "tmp3": ["{x1}*{x4}"],
+        "ans": ["{tmp3}*{tmp2}"]
+    },
+    "word-conditions": {
+
+    },
+    "code-execution":{
+
+    }
+}

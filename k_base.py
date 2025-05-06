@@ -217,6 +217,7 @@ class KnowledgeGraph(object):
                             for noun2 in r:
                                 if noun1.has_con_to(noun2[2]):
                                     continue
+                                
                                 tmp = Edge(noun1,noun2[2],noun2[0],noun2[1],degree)
                                 self.edges.append(tmp)
                                 noun1.edges.append(tmp)

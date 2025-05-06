@@ -342,7 +342,7 @@ def get_all_words(q,a,word_conditions,kb):
     while len(solutions) < 5:
         settled = {}
         while len(settled) < len(mem):
-            # print(settled,mem)
+            print(settled,mem)
             before = len(settled)
             for k,v in mem.items():
                 
@@ -351,12 +351,12 @@ def get_all_words(q,a,word_conditions,kb):
                 
                 ret = None
                 for c in v:
-                    # print("getting ",k)
+                    print("getting ",k)
                     ret = c.get(settled,kb,conditions[k])
                     if ret != None:
                         break
                 if ret != None:
-                    # print(k,"is",ret.uid)
+                    print(k,"is",ret.uid)
                     settled[k] = ret
             if len(settled) == before:
                 
@@ -386,6 +386,7 @@ def get_all_words(q,a,word_conditions,kb):
             attempts += 1
 
         if attempts == 5:
+            print("FAILED")
             break
 
     return solutions

@@ -37,18 +37,19 @@ class RandomInteger(Operation):
     def check(self,vl,all_current):
         return vl >= self.a and vl <= self.b and (vl - self.a) % self.skip == 0
     def get(self,all_current):
-        return random.randrange(self.a,self.b,self.skip)
+        return int(random.randrange(self.a,self.b,self.skip))
     
 class RandomFloat(Operation):
-    def __init__(self, a, b, skip):
+    def __init__(self, a, b, f_point):
         self.get_vl = True
         self.a = a
         self.b = b+1
-        self.skip = skip
+        self.f_point = f_point
     def check(self,vl,all_current):
-        return vl >= self.a and vl <= self.b and (vl - self.a) % self.skip == 0
+        return vl >= self.a and vl <= self.b
     def get(self,all_current):
-        return random.uniform(self.a,self.b,self.skip)
+        temp = random.uniform(self.a,self.b)
+        return round(temp, self.f_point)
 
 class NonPrime(Operation):
     def __init__(self):
@@ -159,6 +160,7 @@ class Modulo(Operation):
         
     def check(self,vl,all_current):
         b = None
+        
         if isinstance(self.b,int):
             
             b = self.b
@@ -166,6 +168,7 @@ class Modulo(Operation):
             if self.b not in all_current:
                 return False
             b = all_current[self.b]
+        print("checking", b, vl)
         if self.direction == 0:
             
             return vl % b == 0
@@ -210,7 +213,7 @@ class LT(Operation):
             if self.b not in all_current:
                 return False
             b = all_current[self.b]
-        
+        # print("is ",b,">",vl)
         return b > vl
         
     def get(self,all_current):
@@ -498,6 +501,8 @@ class DivAll(Operation):
             if sm == None:
                 sm =  all_current[dp]
             else: 
+                if all_current[dp] == 0:
+                    return False
                 sm = sm/all_current[dp]
         return sm == vl
     def get(self,all_current):
@@ -515,6 +520,9 @@ class DivAll(Operation):
             if sm == None:
                 sm = all_current[dp]
             else: 
+                if all_current[dp] == 0:
+                    
+                    return False
                 sm = sm/all_current[dp]
         return sm
 
@@ -566,6 +574,112 @@ class WholeDivAll(Operation):
                 sm = sm//all_current[dp]
         return sm
 
+class Remainder(Operation):
+    def __init__(self,a, b):
+        self.get_vl = True
+        self.a = a
+        self.b = b
+    def check(self, vl, all_current):
+        a = None
+        if isinstance(self.b,int):
+            a = self.b
+        
+        elif isinstance(self.b, str):
+            
+            if self.a not in all_current:
+                return False
+            a = all_current[self.a]
+
+        b = None
+        if isinstance(self.b,int):
+            b = self.b
+        
+        elif isinstance(self.b, str):
+            
+            if self.b not in all_current:
+                return False
+            b = all_current[self.b]
+        if a < b:
+            return False
+
+        return a%b
+
+    def get(self, all_current):
+        a = None
+        if isinstance(self.b,int):
+            a = self.b
+        
+        elif isinstance(self.b, str):
+            
+            if self.a not in all_current:
+                return False
+            a = all_current[self.a]
+
+        b = None
+        if isinstance(self.b,int):
+            b = self.b
+        
+        elif isinstance(self.b, str):
+            
+            if self.b not in all_current:
+                return None
+            b = all_current[self.b]
+        if a < b:
+            return None
+
+        return a%b
+    
+class Round(Operation):
+    def __init__(self,a, b):
+        self.get_vl = True
+        self.a = a
+        self.b = b
+    def check(self, vl, all_current):
+        a = None
+        if isinstance(self.b,int):
+            a = self.b
+        
+        elif isinstance(self.b, str):
+            
+            if self.a not in all_current:
+                return False
+            a = all_current[self.a]
+
+        b = None
+        if isinstance(self.b,int):
+            b = self.b
+        
+        elif isinstance(self.b, str):
+            
+            if self.b not in all_current:
+                return False
+            b = all_current[self.b]
+
+        return round(a,b) == vl
+
+    def get(self, all_current):
+        a = None
+        if isinstance(self.b,int):
+            a = self.b
+        
+        elif isinstance(self.b, str):
+            
+            if self.a not in all_current:
+                return False
+            a = all_current[self.a]
+
+        b = None
+        if isinstance(self.b,int):
+            b = self.b
+        
+        elif isinstance(self.b, str):
+            
+            if self.b not in all_current:
+                return None
+            b = all_current[self.b]
+
+        return round(a,b)
+
 
 def get_all_numbers(q,a,constraints):
     mem: Dict[str,List[Operation]] = {}
@@ -606,10 +720,10 @@ def get_all_numbers(q,a,constraints):
                     vls.append("1")
                 ls.append(RandomInteger(int(vls[0]), int(vls[1]), int(vls[2])))
             elif "randfloat" in c:
-                vls = c[8:-1].split(",")
+                vls = c[10:-1].split(",")
                 if len(vls) == 2:
                     vls.append("1")
-                ls.append(RandomFloat(float(vls[0]), float(vls[1]), float(vls[2])))
+                ls.append(RandomFloat(float(vls[0]), float(vls[1]), int(vls[2])))
             elif "+" in c:
                 vls = list(map(lambda el: el.strip(), c.split("+")))
                 ls.append(SumAll(vls))
@@ -648,17 +762,28 @@ def get_all_numbers(q,a,constraints):
                 else:
                     ls.append(Modulo(vls[1],0))
             elif "ceil" in c:
-                vls = list(map(lambda el: el.strip(), c.split("ceil")))
+                c = c[3:]
+                vls = list(map(lambda el: el.strip(), c.split(" ")))
                 ls.append(CeilOp(vls[1]))
             elif "floor" in c:
-                vls = list(map(lambda el: el.strip(), c.split("floor")))
+                c = c[len("floor"):]
+                vls = list(map(lambda el: el.strip(), c.split(" ")))
                 ls.append(FloorOp(vls[1]))
             elif "gcd" in c:
-                vls = list(map(lambda el: el.strip(), c.split("gcd")))
+                c = c[len("gcd"):]
+                vls = list(map(lambda el: el.strip(), c.split(" ")))
                 ls.append(GCD(vls[1],vls[2]))
             elif "lcm" in c:
-                vls = list(map(lambda el: el.strip(), c.split("lcm")))
+                c = c[len("lcm"):]
+                vls = list(map(lambda el: el.strip(), c.split(" ")))
                 ls.append(LCM(vls[1],vls[2]))
+            elif "rem" in c:
+                vls = list(map(lambda el: el.strip(), c.split("rem")))
+                ls.append(Remainder(vls[0],vls[1]))
+            elif "round" in c:
+                c = c[len("round"):]
+                vls = list(map(lambda el: el.strip(), c.split(" ")))
+                ls.append(Round(vls[0],vls[1]))
         mem[k].extend(ls)
 
 
@@ -667,29 +792,44 @@ def get_all_numbers(q,a,constraints):
     attempts = 0
     while len(solutions) < 5:
         settled = {}
-        while len(settled) < len(mem):
+        flag = True
+        while len(settled) < len(mem) and flag:
+            # print("SETTLED",settled)
             
             for k,v in mem.items():
-                print(settled)
+                
                 if k in settled:
                     continue
-                
+                # print("getting",k)
                 ret = None
                 for c in v:
                     ret = c.get(settled)
                     if ret != None:
                         break
+                if ret == False:
+                    flag = False
+                    break
+
                 if ret != None:
                     
                     settled[k] = ret
+
+            
         success = True
         for k,v in mem.items():
             if not success:
                 break
+            # print("checking..",k)
             for c in v:
+                if k not in settled:
+                    success = False
+                    break
                 success = c.check(settled[k],settled)
-                
+                settled[k] = round(settled[k]*1000) / 1000
+                if settled[k] % 1 == 0:
+                    settled[k] = int(settled[k])
                 if success == False:
+                    print("failed ",k)
                     break
         if success:    
             attempts = 0
@@ -697,6 +837,6 @@ def get_all_numbers(q,a,constraints):
         else:
             attempts += 1
 
-        if attempts == 20:
+        if attempts == 50:
             break
     return solutions

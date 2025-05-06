@@ -1,0 +1,26 @@
+{
+    "id": 52,
+    "difficulty": 1,
+    "type": "arithmetics",
+    "question": "{n1,name} {v1,verb-craft} {x1,int} {n2,noun-handmade} за {x2,int} часа. {n3,name} {v1} {x3,int} {n2} за {x4,int} часа повече от {n1}. Колко общо {n2} ще имат {n1} и {n3} след {x5,int} часа?",
+    "answer": "{n1} {v1} по {x1}/{x2} = <<{x1}/{x2}={tmp1}>>{tmp1} {n2} за час.\n{n3} {v1} по {x3}/({x2}+{x4}) = <<{x2}+{x4}={tmp2}>><<{x3}/{tmp2}={tmp3}>>{tmp3} {n2} за час.\nЗаедно те {v1} {tmp2}+{tmp3} = <<{tmp2}+{tmp3}={tmp4}>>{tmp4} {n2} за час.\nЗа {x5} часа те ще {v1,historical-plural} {tmp4}*{x5} = <<{tmp4}*{x5}={ans}>>{ans} {n2} ### {ans}",
+    "num-answer": "{ans}",
+    "conditions": {
+        "x1": ["randint(2, 10)"],
+        "x2": ["randint(1, 5)"],
+        "x3": ["randint(4, 9)"],
+        "x4": ["randint(1, 3)"],
+        "x5": ["randint(4, 10)"],
+        "tmp1": ["{x1}/{x2}"],
+        "tmp2": ["{x2}+{x4}"],
+        "tmp3": ["{x3}/{x4}"],
+        "tmp4": ["{tmp2}+{tmp3}"],
+        "ans": ["{tmp4}*{x5}"]
+    },
+    "word-conditions": {
+
+    },
+    "code-execution":{
+
+    }
+}

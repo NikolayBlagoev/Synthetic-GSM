@@ -8,7 +8,7 @@
     "conditions": {
         "x1": ["randint(10, 50)"],
         "tmp1": ["2*2"],
-        "tmp2": ["{x1}-{tmp1}"],
+        "tmp2": ["{x1}-{tmp1}", "tmp2 % 4"],
         "ans": ["{tmp2}/4"]
     },
     "word-conditions": {
