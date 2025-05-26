@@ -2,16 +2,16 @@
     "id": 47,
     "difficulty": 1,
     "type": "arithmetics",
-    "question": "{n1,name} яде 1/{x1,int} килограмa {n3,noun-food+tree,plural} всеки ден за {x2, int} дни. {n2,name} яде 1/{x3,int} килограмa {n3} всеки ден за {x4, int} дни. Колко килограмa {n3} ядоха {n1} и {n2} общо?",
-    "answer": "{n1} = ({x1}) * {x2} = <<({x1})*{x2}={tmp1}>>{tmp1}\n{n2} = ({x3}) * {x4} = <<{x3} *{x4}={tmp2}>>{tmp2}\n{tmp1} + {tmp2} = <<{tmp1}+{tmp2}={ans}>>{ans}\nЗаедно те изядоха {ans} килограмa {n3}.\n### {ans}",
+    "question": "{n1,name} яде 1/{x1,int} килограмa {n3,noun-food+tree,plural} всеки ден за {x2, int} дни. {n2,name} яде 1/{x3,int} килограмa {n3} всеки ден за {x4, int} дни. Колко килограмa {n3} изядоха {n1} и {n2} общо?",
+    "answer": "{n1} яде {x2} / {x1} = <<{x2}/{x1}={tmp1}>>{tmp1}\n{n2} яде {x4}/{x3} = <<{x4}/{x3}={tmp2}>>{tmp2} {n3}\nЗаедно те изядоха {tmp1} + {tmp2} = <<{tmp1}+{tmp2}={ans}>>{ans} килограмa {n3}\n### {ans}",
     "num-answer": "{ans}",
     "conditions": {
         "x1": ["randint(2, 5)"],
         "x2": ["randint(10, 20)"],
         "x3": ["randint(2, 5)"],
         "x4": ["randint(10, 20)"],
-        "tmp1": ["{x1}*{x2}"],
-        "tmp2": ["{x3}*{x4}"],
+        "tmp1": ["{x2}/{x1}"],
+        "tmp2": ["{x4}/{x3}"],
         "ans": ["{tmp1}+{tmp2}"]
     },
     "word-conditions": {

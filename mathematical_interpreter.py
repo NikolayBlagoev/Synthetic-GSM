@@ -168,7 +168,7 @@ class Modulo(Operation):
             if self.b not in all_current:
                 return False
             b = all_current[self.b]
-        print("checking", b, vl)
+        # print("checking", b, vl)
         if self.direction == 0:
             
             return vl % b == 0
@@ -829,7 +829,7 @@ def get_all_numbers(q,a,constraints):
                 if settled[k] % 1 == 0:
                     settled[k] = int(settled[k])
                 if success == False:
-                    print("failed ",k)
+                    # print("failed ",k)
                     break
         if success:    
             attempts = 0

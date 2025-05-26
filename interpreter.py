@@ -45,7 +45,7 @@ def process_string(q,ws,ns,prev_state,prev_noun,code_results,kb):
                 add = ""
                 if "gender" in item[0]:
                     r2 = re.search('\((.*?)\)', item[0])
-                    print("we have",ws)
+                    #print("we have",ws)
                     gender = ws[r2.group(1)].gender
                     if gender == "f":
                         add += "а"

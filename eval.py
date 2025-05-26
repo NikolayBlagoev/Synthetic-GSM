@@ -1,40 +1,61 @@
-from transformers import AutoTokenizer, AutoModelForCausalLM, BitsAndBytesConfig
+import transformers
+import torch
+import random
+random.seed(42)
+from itertools import combinations
+from transformers import GenerationConfig
+import gc
 from math import isclose
+from run import run
+from transformers import AutoTokenizer, AutoModelForCausalLM
+generation_params = GenerationConfig(
+    max_new_tokens=512,              
+    do_sample = False,
+    top_k=1,
+    top_p=1,
+    repetition_penalty=1.1,
+    eos_token_id=[1,107]
+)
+
+model_id = "INSAIT-Institute/BgGPT-Gemma-2-9B-IT-v1.0"
+
 tokenizer = AutoTokenizer.from_pretrained(
-    "INSAIT-Institute/BgGPT-Gemma-2-9B-IT-v1.0",
+    model_id,
     use_default_system_prompt=False,
 )
-
-def draw_question():
-    return {"q": "Аз съм ники", "a": "Ти не си ники", "f": 45}
-def generate_prompt_bg(shots = 8):
-    txt = ""
-
-    txt += "Реши следните математически задачи стъпка по стъпка:\n"
-    for el in range(shots):
-        q = draw_question()
-        txt += f"Q: {q["q"]}"
-        txt += f"A: Нека решим задачата стъпка по стъпка. {q["a"]}. Тъй че отговорът е {q["f"]}\n"
-    final_q = draw_question()
-    txt += f"Q: {final_q["q"]}"
-    txt += f"A: "
-    return txt, final_q
-
-
-
-model = AutoModelForCausalLM.from_pretrained(
-    "INSAIT-Institute/BgGPT-Gemma-2-9B-IT-v1.0",
+model = AutoModelForCausalLM.from_pretrained(model_id,
     torch_dtype=torch.bfloat16,
     attn_implementation="eager",
-    device_map="auto",
-)
+    device_map="cuda")
+
+
+def generate_prompt_bg(ds,shots = 8):
+    txt = ""
+    # print(len(ds))
+    order = random.sample(list(range(len(ds["question"]))),shots+1)
+    txt += "Реши следните математически задачи стъпка по стъпка:\n"
+    
+    for el in order[:-1]:
+        
+        
+        txt += f"Q: {ds["question"][el]}"
+        txt += f"\nA: Нека решим задачата стъпка по стъпка. {ds["answer"][el]}. Тъй че отговорът е {ds["num_answer"][el]}\n"
+    
+    txt += f"Q: {ds["question"][order[-1]]}"
+    txt += f"\nA: "
+    return txt, ds["num_answer"][order[-1]], ds["answer"][order[-1]], ds["question"][order[-1]]
+
 
 
 
 correct = 0
-for _ in range(1000):
-    
-    prompt, final_q = generate_prompt_bg()
+generate_ds = run(12,[1,50])
+print(len(generate_ds["question"]))
+inaccuracy = []
+for _ in range(100):
+    print("-------------------------------------")
+    print(correct)
+    prompt, final_num, final_a, final_q = generate_prompt_bg(generate_ds)
     messages = [
         {"role": "user", "content": prompt},
     ]
@@ -43,23 +64,53 @@ for _ in range(1000):
         return_tensors="pt",
         add_generation_prompt=True,
         return_dict=True
-    )
+    ).to("cuda")
 
     outputs = model.generate(
         **input_ids,
         generation_config=generation_params
     )
     ans = tokenizer.decode(outputs[0])
+    #print(prompt)
+    # print(ans)
+    # print(final_num)
     ans = ans.split(" ")
     i = len(ans)
+    
     ret = None
     while i > 0:
         i -= 1
         try:
+            if len(ans[i]) < 1:
+                continue
+            if ans[i][-1] in "!.,':;-+?":
+                ans[i] = ans[i][:-1]
+            if len(ans[i]) < 1:
+                continue
+            if ans[i][0] in "!.,':;-+?":
+                ans[i] = ans[i][1:]
             ret = float(ans[i].strip())
+            break
         except ValueError:
             continue
-    if ret != None and isclose(final_q["f"],ret):
+    if ret != None and isclose(final_num,ret,abs_tol=0.01):
+        with open("f1.txt","a",encoding="utf-8") as fd:
+            fd.writelines("-------------\n")
+            fd.writelines("CORRECT ANSWER!!\n")
+            fd.writelines(final_q + "\n")
+            fd.writelines(final_a + "\n")
+            fd.writelines(str(ret) + "\n" )
+            fd.writelines(" ".join(ans))
         correct += 1
+    else:
+        with open("f1.txt","a",encoding="utf-8") as fd:
+            fd.writelines("-------------\n")
+            fd.writelines("INCORRECT ANSWER!!\n")
+            fd.writelines(final_q + "\n")
+            fd.writelines(final_a + "\n")
+            fd.writelines(str(ret) + "\n")
+            fd.writelines(" ".join(ans))
+        inaccuracy.append(abs(final_num-ret)/ret)
             
-print(correct/1000)
+print(correct/100)
+print(sum(inaccuracy)/len(inaccuracy))
