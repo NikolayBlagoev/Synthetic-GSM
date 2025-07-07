@@ -13,8 +13,10 @@ kb = load_knowledge_base()
 def run(question_count,rng):
     df = {'question': [], 'answer': [], 'type': [], 'num_answer': []}
     duplicate_check = {}
+    if len(rng) == 2:
+        rng = [k for k in range(rng[0],rng[1])]
     for _ in range(question_count):
-        for i in range(rng[0],rng[1]):
+        for i in rng:
             print(i)
             with open(f"templates/q{i}.json","r",encoding="utf-8") as fp:
                 tmp = json.load(fp)
