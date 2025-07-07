@@ -13,9 +13,7 @@ kb = load_knowledge_base()
 def run(question_count,rng):
     df = {'question': [], 'answer': [], 'type': [], 'num_answer': []}
     duplicate_check = {}
-    if len(rng) == 1:
-        rng = [rng]
-    elif len(rng) == 2:
+    if len(rng) == 2:
         rng = list(range(rng[0],rng[1]))
     for _ in range(question_count):
         for i in rng:
