@@ -68,6 +68,7 @@ for q_id in range(1,51):
 
         outputs = model.generate(
             **input_ids,
+            use_cache = False,
             generation_config=generation_params
         )
         ans = tokenizer.decode(outputs[0])
