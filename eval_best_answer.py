@@ -1,3 +1,8 @@
+import transformers
+import torch
+import random
+random.seed(42)
+from itertools import combinations
 from transformers import GenerationConfig
 import gc
 from math import isclose
