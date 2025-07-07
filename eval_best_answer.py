@@ -32,7 +32,7 @@ model = AutoModelForCausalLM.from_pretrained(model_id,
 
 
 def generate_prompt_bg(q_id, shots = 8):
-    rnd_sample = random.sample([i for i in range(1,51) if i != q_id], shots)
+    rnd_sample = random.sample([i for i in range(1,51) if i != q_id], shots * 2)
     generate_ds = run(1,rnd_sample)
     txt = ""
     # print(len(ds))
@@ -40,11 +40,12 @@ def generate_prompt_bg(q_id, shots = 8):
     txt += "Реши следните математически задачи стъпка по стъпка:\n"
     # print(generate_ds)
     for el in range(len(generate_ds["question"])):
-
+        if el > 8:
+            break
         
         
         txt += f"Q:" + generate_ds["question"][el]
-        txt += f"\nA: Нека решим задачата стъпка по стъпка. " + generate_ds["answer"][el] + ". Тъй че отговорът е " + {generate_ds["num_answer"][el]} + "\n"
+        txt += f"\nA: Нека решим задачата стъпка по стъпка. " + generate_ds["answer"][el] + ". Тъй че отговорът е " + generate_ds["num_answer"][el] + "\n"
     generate_ds = run(1,[q_id,q_id+1])
     txt += f"Q: " + generate_ds["question"][0]
     txt += f"\nA: "
