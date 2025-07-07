@@ -7,21 +7,24 @@ from transformers import GenerationConfig
 import gc
 from math import isclose
 from run import run
+from string import punctuation
 from transformers import AutoTokenizer, AutoModelForCausalLM
 generation_params = GenerationConfig(
-    max_new_tokens=512,              
+    max_new_tokens=1024,              
     do_sample = False,
     top_k=1,
     top_p=1,
     repetition_penalty=1.1,
-    eos_token_id=[1,107]
+    eos_token_id=[1]
 )
-
+token = ""
 model_id = "INSAIT-Institute/BgGPT-Gemma-2-9B-IT-v1.0"
-
+model_id = "meta-llama/Meta-Llama-3.1-8B-Instruct"
+model_id = "google/gemma-2-9b-it"
 tokenizer = AutoTokenizer.from_pretrained(
     model_id,
     use_default_system_prompt=False,
+    token = token
 )
 model = AutoModelForCausalLM.from_pretrained(model_id,
     torch_dtype=torch.bfloat16,
@@ -59,11 +62,9 @@ for _ in range(100):
     messages = [
         {"role": "user", "content": prompt},
     ]
-    input_ids = tokenizer.apply_chat_template(
-        messages,
-        return_tensors="pt",
-        add_generation_prompt=True,
-        return_dict=True
+    input_ids = tokenizer(
+        prompt,
+        return_tensors="pt"
     ).to("cuda")
 
     outputs = model.generate(
@@ -81,15 +82,16 @@ for _ in range(100):
     while i > 0:
         i -= 1
         try:
+            while len(ans[i]) > 0:
+                if ans[i][-1] in "!.,':;-+?*":
+                    ans[i] = ans[i][:-1]
+                elif ans[i][0] in "!.,':;-+?*":
+                    ans[i] = ans[i][1:]
+                else:
+                    break
             if len(ans[i]) < 1:
                 continue
-            if ans[i][-1] in "!.,':;-+?":
-                ans[i] = ans[i][:-1]
-            if len(ans[i]) < 1:
-                continue
-            if ans[i][0] in "!.,':;-+?":
-                ans[i] = ans[i][1:]
-            ret = float(ans[i].strip())
+            ret = float(ans[i].strip(punctuation).strip())
             break
         except ValueError:
             continue
@@ -110,7 +112,7 @@ for _ in range(100):
             fd.writelines(final_a + "\n")
             fd.writelines(str(ret) + "\n")
             fd.writelines(" ".join(ans))
-        inaccuracy.append(abs(final_num-ret)/ret)
+        inaccuracy.append(abs(final_num-ret)/(1e-6+ret))
             
 print(correct/100)
 print(sum(inaccuracy)/len(inaccuracy))
