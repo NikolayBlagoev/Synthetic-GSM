@@ -16,7 +16,7 @@ def run(question_count,rng):
     if len(rng) == 1:
         rng = [rng]
     elif len(rng) == 2:
-        rng = list(rng[0],rng[1])
+        rng = list(range(rng[0],rng[1]))
     for _ in range(question_count):
         for i in rng:
             print(i)

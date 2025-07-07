@@ -46,7 +46,7 @@ def generate_prompt_bg(q_id, shots = 8):
         
         txt += f"Q:" + generate_ds["question"][el]
         txt += f"\nA: Нека решим задачата стъпка по стъпка. " + generate_ds["answer"][el] + ". Тъй че отговорът е " + str(generate_ds["num_answer"][el]) + "\n"
-    generate_ds = run(1,[q_id,q_id+1])
+    generate_ds = run(1,[q_id])
     txt += f"Q: " + generate_ds["question"][0]
     txt += f"\nA: "
     return txt, generate_ds["num_answer"][0], generate_ds["answer"][0], generate_ds["question"][0]
