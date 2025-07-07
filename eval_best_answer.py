@@ -1,8 +1,3 @@
-import transformers
-import torch
-import random
-random.seed(42)
-from itertools import combinations
 from transformers import GenerationConfig
 import gc
 from math import isclose
@@ -17,10 +12,9 @@ generation_params = GenerationConfig(
     repetition_penalty=1.1,
     eos_token_id=[1,107]
 )
-token = "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"
+token = ""
 model_id = "INSAIT-Institute/BgGPT-Gemma-2-9B-IT-v1.0"
-# model_id = "meta-llama/Meta-Llama-3.1-8B-Instruct"
-# model_id = "google/gemma-2-9b-it"
+
 tokenizer = AutoTokenizer.from_pretrained(
     model_id,
     use_default_system_prompt=False,
@@ -34,7 +28,7 @@ model = AutoModelForCausalLM.from_pretrained(model_id,
 
 def generate_prompt_bg(q_id, shots = 8):
     rnd_sample = random.sample([i for i in range(1,51) if i != q_id], shots)
-    generate_ds = run(shots+1,[q_id])
+    generate_ds = run(1,rnd_sample)
     txt = ""
     # print(len(ds))
     # order = random.sample(list(range(len(ds["question"]))),shots+1)
@@ -46,7 +40,7 @@ def generate_prompt_bg(q_id, shots = 8):
         
         txt += f"Q: {generate_ds["question"][el]}"
         txt += f"\nA: Нека решим задачата стъпка по стъпка. {generate_ds["answer"][el]}. Тъй че отговорът е {generate_ds["num_answer"][el]}\n"
-    generate_ds = run(1,[q_id])
+    generate_ds = run(1,[q_id,q_id+1])
     txt += f"Q: {generate_ds["question"][0]}"
     txt += f"\nA: "
     return txt, generate_ds["num_answer"][0], generate_ds["answer"][0], generate_ds["question"][0]

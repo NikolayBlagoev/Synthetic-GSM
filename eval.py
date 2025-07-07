@@ -17,7 +17,7 @@ generation_params = GenerationConfig(
     repetition_penalty=1.1,
     eos_token_id=[1]
 )
-token = "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"
+token = ""
 model_id = "INSAIT-Institute/BgGPT-Gemma-2-9B-IT-v1.0"
 model_id = "meta-llama/Meta-Llama-3.1-8B-Instruct"
 model_id = "google/gemma-2-9b-it"
