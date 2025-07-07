@@ -40,7 +40,7 @@ def generate_prompt_bg(q_id, shots = 8):
     txt += "Реши следните математически задачи стъпка по стъпка:\n"
     # print(generate_ds)
     for el in range(len(generate_ds["question"])):
-        if el > 8:
+        if el == 8:
             break
         
         
