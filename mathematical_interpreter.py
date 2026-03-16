@@ -762,7 +762,7 @@ def get_all_numbers(q,a,constraints):
                 else:
                     ls.append(Modulo(vls[1],0))
             elif "ceil" in c:
-                c = c[3:]
+                c = c[len("ceil"):]
                 vls = list(map(lambda el: el.strip(), c.split(" ")))
                 ls.append(CeilOp(vls[1]))
             elif "floor" in c:
